@@ -1,180 +1,98 @@
 <!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SQL Study Hub</title>
-<meta name="description" content="A personal study hub for learning SQL, built around Data With Baraa's free SQL course.">
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Home | SQL Study Notes</title>
+<meta name="description" content="Personal study notes for the Data With Baraa SQL Ultimate Course, with examples and flashcards.">
 <style>
-  :root { --bg:#fafafa; --fg:#1b1f24; --muted:#5b6470; --card:#fff; --line:#e3e6ea; --accent:#2563eb; }
-  @media (prefers-color-scheme: dark) {
-    :root { --bg:#0f1318; --fg:#e8ebef; --muted:#9aa4b0; --card:#171c23; --line:#262d36; --accent:#6ea8ff; }
-  }
-  * { box-sizing:border-box; }
-  body { margin:0; font:16px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif; background:var(--bg); color:var(--fg); }
-  a { color:var(--accent); }
-  header.site { border-bottom:1px solid var(--line); background:var(--card); position:sticky; top:0; z-index:5; }
-  nav { max-width:960px; margin:0 auto; padding:12px 16px; display:flex; gap:18px; flex-wrap:wrap; align-items:center; }
-  nav strong { margin-right:auto; }
-  nav a { text-decoration:none; color:var(--muted); font-size:.95rem; }
-  nav a:hover { color:var(--accent); }
-  main { max-width:960px; margin:0 auto; padding:0 16px 48px; }
-  .hero { padding:56px 0 32px; }
-  .hero h1 { font-size:clamp(2rem,5vw,3rem); line-height:1.15; margin:0 0 12px; }
-  .hero p { color:var(--muted); max-width:640px; margin:0 0 20px; }
-  .btn { display:inline-block; padding:10px 18px; border-radius:8px; background:var(--accent); color:#fff; text-decoration:none; font-weight:600; margin-right:8px; }
-  .btn.alt { background:transparent; color:var(--accent); border:1px solid var(--accent); }
-  section { padding:32px 0; border-top:1px solid var(--line); }
-  h2 { margin:0 0 6px; font-size:1.6rem; }
-  .lead { color:var(--muted); margin:0 0 20px; }
-  .grid { display:grid; gap:14px; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); }
-  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:18px; }
-  .card h3 { margin:0 0 6px; font-size:1.05rem; }
-  .card p { margin:0 0 10px; color:var(--muted); font-size:.95rem; }
-  ol.steps { padding-left:20px; }
-  ol.steps li { margin-bottom:10px; }
-  ul.check { list-style:none; padding:0; margin:0; }
-  ul.check li { padding:8px 0; border-bottom:1px solid var(--line); }
-  ul.check label { cursor:pointer; display:flex; gap:10px; align-items:flex-start; }
-  ul.check input:checked + span { text-decoration:line-through; color:var(--muted); }
-  .progress { font-size:.9rem; color:var(--muted); margin-bottom:12px; }
-  .notice { background:var(--card); border-left:4px solid var(--accent); padding:14px 16px; border-radius:6px; }
-  footer { border-top:1px solid var(--line); padding:24px 16px; text-align:center; color:var(--muted); font-size:.9rem; }
-  code { background:var(--card); border:1px solid var(--line); padding:1px 6px; border-radius:4px; font-size:.9em; }
-</style>
-</head>
-<body>
-<header class="site">
-  <nav>
-    <strong>SQL Study Hub</strong>
-    <a href="#about">About</a>
-    <a href="#setup">Setup</a>
-    <a href="#resources">Resources</a>
-    <a href="#projects">Projects</a>
-    <a href="#checklist">Checklist</a>
-    <a href="#more">More tracks</a>
-    <a href="#terms">Credit</a>
-  </nav>
-</header>
-
-<main>
-  <div class="hero">
-    <h1>Learn SQL, step by step.</h1>
-    <p>My personal study hub for the free SQL course from Data With Baraa: what to install, where the materials live, which projects to build, and a checklist to track progress.</p>
-    <a class="btn" href="https://www.datawithbaraa.com/wiki/sql" target="_blank" rel="noopener">Open the original SQL wiki</a>
-    <a class="btn alt" href="#setup">Get set up</a>
-  </div>
-
-  <section id="about">
-    <h2>About the course</h2>
-    <p class="lead">What the course is and why it's worth following.</p>
-    <div class="grid">
-      <div class="card"><h3>SQL as the foundation</h3><p>SQL is the language data professionals use to query data, spot patterns, and build insights. It underpins work in Power BI, Tableau, and Python.</p></div>
-      <div class="card"><h3>Understand, don't memorize</h3><p>The goal is to understand how data moves and connects between tables, not just to memorize commands.</p></div>
-      <div class="card"><h3>Your mentor</h3><p>Taught by Baraa, who cites 17+ years of data work at Mercedes-Benz and Bosch.</p></div>
-    </div>
-  </section>
-
-  <section id="setup">
-    <h2>Setup</h2>
-    <p class="lead">Two free tools from Microsoft are all you need to follow along.</p>
-    <ol class="steps">
-      <li><strong>Install SQL Server Express.</strong> This hosts your database. <a href="https://www.microsoft.com/en-us/sql-server/sql-server-downloads" target="_blank" rel="noopener">Download</a></li>
-      <li><strong>Install SQL Server Management Studio (SSMS).</strong> This is where you write and run queries. <a href="https://learn.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver16" target="_blank" rel="noopener">Download</a></li>
-      <li><strong>Download the course files.</strong> Datasets, scripts, and resources for the course and its three projects. <a href="https://academy.datawithbaraa.com/l/digital_download/930511/sql-course-materials" target="_blank" rel="noopener">Free download</a></li>
-      <li><strong>Optional: install a sample database.</strong> Microsoft's AdventureWorks guide walks you through it. <a href="https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure?view=sql-server-ver16&tabs=ssms" target="_blank" rel="noopener">Guide</a></li>
-    </ol>
-  </section>
-
-  <section id="resources">
-    <h2>Resources</h2>
-    <p class="lead">Everything the wiki points to, in one place.</p>
-    <div class="grid">
-      <div class="card"><h3>Course roadmap</h3><p>A mind map of the whole course.</p><a href="https://mm.tt/app/map/2937557798?t=gEsd0gNKbd" target="_blank" rel="noopener">Open roadmap</a></div>
-      <div class="card"><h3>Course GitHub repo</h3><p>Lesson scripts and files.</p><a href="https://github.com/DataWithBaraa/sql-ultimate-course" target="_blank" rel="noopener">sql-ultimate-course</a></div>
-      <div class="card"><h3>SQL Course Mastery (paid)</h3><p>Adds progress tracking, certification, and subtitles in eight languages.</p><a href="https://www.datawithbaraa.com/course/sql-full-course-for-beginners" target="_blank" rel="noopener">Course page</a></div>
-      <div class="card"><h3>Data Academy</h3><p>The academy home for Baraa's courses.</p><a href="https://academy.datawithbaraa.com/" target="_blank" rel="noopener">academy.datawithbaraa.com</a></div>
-      <div class="card"><h3>Community</h3><p>Ask questions and learn with others.</p><a href="https://discord.gg/gsVJbMxKcA" target="_blank" rel="noopener">Join Discord</a></div>
-    </div>
-  </section>
-
-  <section id="projects">
-    <h2>Projects</h2>
-    <p class="lead">Three hands-on projects accompany the course.</p>
-    <div class="grid">
-      <div class="card"><h3>SQL Data Warehouse</h3><p>Build a data warehouse end to end.</p><a href="https://github.com/DataWithBaraa/sql-data-warehouse-project" target="_blank" rel="noopener">GitHub repo</a><br><a href="https://www.notion.com/templates/sql-data-warehouse-project" target="_blank" rel="noopener">Notion project template</a></div>
-      <div class="card"><h3>SQL Data Analytics</h3><p>Apply SQL to analytical questions.</p><a href="https://github.com/DataWithBaraa/sql-data-analytics-project" target="_blank" rel="noopener">GitHub repo</a></div>
-      <div class="card"><h3>Course exercises</h3><p>Practice files bundled with the course materials download.</p><a href="https://academy.datawithbaraa.com/l/digital_download/930511/sql-course-materials" target="_blank" rel="noopener">Get the files</a></div>
-    </div>
-  </section>
-
-  <section id="checklist">
-    <h2>My progress checklist</h2>
-    <p class="lead">Tick items off as you go. Progress is saved in your browser.</p>
-    <div class="progress" id="progress"></div>
-    <ul class="check" id="list"></ul>
-  </section>
-
-  <section id="more">
-    <h2>More tracks on the site</h2>
-    <p class="lead">The wiki also has guides for related tools.</p>
-    <div class="grid">
-      <div class="card"><h3>Python</h3><a href="https://www.datawithbaraa.com/wiki/python" target="_blank" rel="noopener">Python guide</a></div>
-      <div class="card"><h3>Tableau</h3><a href="https://www.datawithbaraa.com/wiki/tableau" target="_blank" rel="noopener">Tableau guide</a></div>
-      <div class="card"><h3>Power BI</h3><a href="https://www.datawithbaraa.com/wiki/power-bi" target="_blank" rel="noopener">Power BI guide</a></div>
-    </div>
-  </section>
-
-  <section id="terms">
-    <h2>Credit and terms</h2>
-    <div class="notice">
-      <p>This is an unofficial study page. All course content, datasets, and scripts belong to <strong>Data With Baraa</strong> and are for learning and personal use only. Commercial use, redistribution, and resale are not permitted. This site contains my own summaries and links, not copies of the lessons. For the real material, go to the <a href="https://www.datawithbaraa.com/wiki/sql" target="_blank" rel="noopener">original wiki</a>.</p>
-    </div>
-  </section>
-</main>
-
-<footer>Unofficial study notes · Content credit: Data With Baraa</footer>
-
+:root{--bg:#fafafa;--fg:#1b1f24;--muted:#5b6470;--card:#fff;--line:#e3e6ea;--accent:#2563eb;--code:#0f172a;--codefg:#e2e8f0;--ok:#16a34a;--warn:#b45309;--side:#f3f4f6}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0f1318;--fg:#e8ebef;--muted:#9aa4b0;--card:#171c23;--line:#262d36;--accent:#6ea8ff;--code:#0a0e13;--codefg:#dbe4ee;--ok:#4ade80;--warn:#fbbf24;--side:#12171d}}
+:root[data-theme=dark]{--bg:#0f1318;--fg:#e8ebef;--muted:#9aa4b0;--card:#171c23;--line:#262d36;--accent:#6ea8ff;--code:#0a0e13;--codefg:#dbe4ee;--ok:#4ade80;--warn:#fbbf24;--side:#12171d}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font:16px/1.7 system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--fg)}
+a{color:var(--accent)}
+.top{position:sticky;top:0;z-index:20;background:var(--card);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px;padding:10px 16px}
+.top .brand{font-weight:700;text-decoration:none;color:var(--fg)}
+.top .sp{flex:1}
+.top button,.top a.btn{background:transparent;border:1px solid var(--line);color:var(--fg);border-radius:8px;padding:6px 10px;cursor:pointer;font:inherit;font-size:.9rem;text-decoration:none}
+.layout{display:flex;max-width:1280px;margin:0 auto}
+nav.side{width:270px;flex:none;position:sticky;top:53px;align-self:flex-start;height:calc(100vh - 53px);overflow:auto;padding:14px;background:var(--side);border-right:1px solid var(--line)}
+nav.side input{width:100%;padding:8px 10px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--fg);font:inherit;font-size:.9rem;margin-bottom:10px}
+nav.side h4{margin:14px 0 4px;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+nav.side a{display:flex;gap:8px;align-items:center;padding:5px 8px;border-radius:6px;text-decoration:none;color:var(--fg);font-size:.93rem}
+nav.side a:hover{background:var(--line)}nav.side a.cur{background:var(--accent);color:#fff}
+nav.side a .n{color:var(--muted);width:1.6em;text-align:right;flex:none;font-variant-numeric:tabular-nums}
+nav.side a.cur .n{color:#fff}
+nav.side a .tick{margin-left:auto;color:var(--ok);font-weight:700}
+main{flex:1;min-width:0;padding:24px 28px 80px;max-width:900px}
+h1{font-size:2rem;line-height:1.2;margin:.2em 0 .3em}h2{margin:1.6em 0 .4em;font-size:1.35rem}h3{margin:1.2em 0 .3em}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
+.chip{font-size:.8rem;border:1px solid var(--line);background:var(--card);padding:2px 10px;border-radius:99px;color:var(--muted)}
+.lead{font-size:1.1rem;color:var(--muted)}
+.sec{border-top:1px solid var(--line);padding-top:6px}
+pre{position:relative;background:var(--code);color:var(--codefg);padding:14px 16px;border-radius:10px;overflow:auto;font:13.5px/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;margin:10px 0}
+pre .k{color:#7dd3fc;font-weight:600}pre .f{color:#fcd34d}pre .s{color:#86efac}pre .c{color:#94a3b8;font-style:italic}pre .n{color:#f9a8d4}
+pre button{position:absolute;top:6px;right:6px;background:#334155;color:#e2e8f0;border:0;border-radius:6px;padding:3px 8px;font-size:.75rem;cursor:pointer;opacity:.0}
+pre:hover button{opacity:1}
+code{background:var(--card);border:1px solid var(--line);padding:1px 6px;border-radius:5px;font-size:.88em}
+pre code{background:none;border:0;padding:0;font-size:inherit}
+.box{border-radius:10px;padding:12px 16px;margin:14px 0;border:1px solid var(--line);background:var(--card)}
+.box h3{margin:0 0 4px;font-size:1rem}.box ul{margin:.3em 0;padding-left:1.2em}
+.box.r{border-left:4px solid var(--accent)}.box.m{border-left:4px solid var(--warn)}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;text-decoration:none;color:var(--fg);display:block}
+.card:hover{border-color:var(--accent)}.card b{display:block}.card span{color:var(--muted);font-size:.9rem}
+table{border-collapse:collapse;width:100%;margin:10px 0;font-size:.93rem;background:var(--card)}
+th,td{border:1px solid var(--line);padding:6px 10px;text-align:left;vertical-align:top}th{background:var(--side)}
+.scroll{overflow:auto}
+details.q{border:1px solid var(--line);border-radius:10px;padding:8px 14px;margin:8px 0;background:var(--card)}
+details.q summary{cursor:pointer;font-weight:600}
+.done{display:flex;gap:10px;align-items:center;margin:26px 0;padding:12px 16px;border:1px dashed var(--line);border-radius:10px}
+.pn{display:flex;justify-content:space-between;gap:12px;margin-top:30px}
+.bar{height:8px;border-radius:99px;background:var(--line);overflow:hidden}.bar i{display:block;height:100%;background:var(--ok);width:0}
+.fc{min-height:180px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:1.2rem;padding:24px;cursor:pointer;user-select:none}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.row button{background:var(--card);color:var(--fg);border:1px solid var(--line);border-radius:8px;padding:8px 14px;cursor:pointer;font:inherit}
+.row button.p{background:var(--accent);color:#fff;border-color:var(--accent)}
+.menu{display:none}
+@media(max-width:860px){.menu{display:inline-block}nav.side{position:fixed;left:0;top:53px;z-index:15;transform:translateX(-100%);transition:transform .2s;width:80%;max-width:300px}nav.side.open{transform:none}main{padding:18px 16px 70px}}
+footer{border-top:1px solid var(--line);padding:20px 16px;text-align:center;color:var(--muted);font-size:.88rem}
+</style></head><body>
+<div class="top"><button class="menu" id="menu" aria-label="Menu">Menu</button><a class="brand" href="index.html">SQL Study Notes</a><span class="sp"></span><a class="btn" href="https://github.com/DataWithBaraa/sql-ultimate-course" target="_blank" rel="noopener">Source repo</a><button id="theme" aria-label="Toggle theme">Light/Dark</button></div>
+<div class="layout"><nav class="side" id="side"><input id="q" placeholder="Filter topics..." aria-label="Filter topics"><h4>Start</h4><a href="index.html" class="cur"><span class="n"></span><span>Home</span></a><a href="setup.html"><span class="n"></span><span>Setup guide</span></a><a href="data.html"><span class="n"></span><span>The databases</span></a><h4>Core querying</h4><a href="select.html" data-id="select"><span class="n">1</span><span>Query Data: SELECT</span><span class="tick"></span></a><a href="ddl.html" data-id="ddl"><span class="n">2</span><span>Define Structure: DDL</span><span class="tick"></span></a><a href="dml.html" data-id="dml"><span class="n">3</span><span>Change Data: DML</span><span class="tick"></span></a><a href="filtering.html" data-id="filtering"><span class="n">4</span><span>Filtering Data</span><span class="tick"></span></a><a href="joins.html" data-id="joins"><span class="n">5</span><span>Combining Tables: JOINs</span><span class="tick"></span></a><a href="sets.html" data-id="sets"><span class="n">6</span><span>SET Operators</span><span class="tick"></span></a><h4>Functions</h4><a href="string.html" data-id="string"><span class="n">7</span><span>String Functions</span><span class="tick"></span></a><a href="number.html" data-id="number"><span class="n">8</span><span>Number Functions</span><span class="tick"></span></a><a href="date.html" data-id="date"><span class="n">9</span><span>Date &amp; Time Functions</span><span class="tick"></span></a><a href="null.html" data-id="null"><span class="n">10</span><span>NULL Functions</span><span class="tick"></span></a><a href="case.html" data-id="case"><span class="n">11</span><span>CASE Statement</span><span class="tick"></span></a><a href="aggregate.html" data-id="aggregate"><span class="n">12</span><span>Aggregate Functions</span><span class="tick"></span></a><h4>Window functions</h4><a href="window-basics.html" data-id="window-basics"><span class="n">13</span><span>Window Functions: Basics</span><span class="tick"></span></a><a href="window-agg.html" data-id="window-agg"><span class="n">14</span><span>Window Aggregate Functions</span><span class="tick"></span></a><a href="window-rank.html" data-id="window-rank"><span class="n">15</span><span>Window Ranking Functions</span><span class="tick"></span></a><a href="window-value.html" data-id="window-value"><span class="n">16</span><span>Window Value Functions</span><span class="tick"></span></a><h4>Reusable logic</h4><a href="subquery.html" data-id="subquery"><span class="n">17</span><span>Subqueries</span><span class="tick"></span></a><a href="cte.html" data-id="cte"><span class="n">18</span><span>CTE (Common Table Expressions)</span><span class="tick"></span></a><a href="views.html" data-id="views"><span class="n">19</span><span>Views</span><span class="tick"></span></a><a href="temp.html" data-id="temp"><span class="n">20</span><span>Temporary Tables &amp; CTAS</span><span class="tick"></span></a><a href="procs.html" data-id="procs"><span class="n">21</span><span>Stored Procedures</span><span class="tick"></span></a><a href="triggers.html" data-id="triggers"><span class="n">22</span><span>Triggers</span><span class="tick"></span></a><h4>Performance</h4><a href="indexes.html" data-id="indexes"><span class="n">23</span><span>Indexes</span><span class="tick"></span></a><a href="partitions.html" data-id="partitions"><span class="n">24</span><span>Partitions</span><span class="tick"></span></a><a href="performance.html" data-id="performance"><span class="n">25</span><span>30 Performance Tips</span><span class="tick"></span></a><h4>Beyond</h4><a href="ai.html" data-id="ai"><span class="n">26</span><span>AI and SQL</span><span class="tick"></span></a><a href="projects.html" data-id="projects"><span class="n">27</span><span>Projects: ETL &amp; Data Analytics</span><span class="tick"></span></a><h4>Review</h4><a href="cheatsheet.html"><span class="n"></span><span>Cheat sheet</span></a><a href="practice.html"><span class="n"></span><span>Flashcards</span></a></nav><main><h1>SQL Ultimate Course: my study notes</h1><p class="lead">Everything in the course repository (scripts, slides, datasets, setup guide) turned into notes I can come back to when I forget. Read a chapter, run the examples, tick it off, then drill with the flashcards.</p><div class="box"><div class="bar"><i id="prog"></i></div><p id="proglabel" style="margin:6px 0 0;color:var(--muted)"></p></div><h2>How to use these notes</h2><ol><li><a href="setup.html">Set up</a> SQL Server and create the two databases.</li><li>Look at <a href="data.html">the data</a> once so the examples make sense.</li><li>Work through the chapters in order. Type the queries yourself.</li><li>Use the <a href="cheatsheet.html">cheat sheet</a> and <a href="practice.html">flashcards</a> to review. Come back after a few days: forgetting is normal, repeating is the fix.</li></ol><h2>Chapters</h2><div class="grid"><a class="card" href="select.html"><b>1. Query Data: SELECT</b><span>SELECT is how you ask the database a question. Everything else in SQL (filtering, joining, grouping) is a clau...</span></a><a class="card" href="ddl.html"><b>2. Define Structure: DDL</b><span>DDL (Data Definition Language) shapes the database itself: CREATE builds a table, ALTER changes it, DROP remov...</span></a><a class="card" href="dml.html"><b>3. Change Data: DML</b><span>INSERT adds rows, UPDATE changes rows, DELETE removes rows. UPDATE and DELETE without WHERE touch every row.</span></a><a class="card" href="filtering.html"><b>4. Filtering Data</b><span>WHERE accepts comparison, logical, range, membership and pattern operators. Combine them to pinpoint rows.</span></a><a class="card" href="joins.html"><b>5. Combining Tables: JOINs</b><span>Data is split across tables to avoid repetition. A JOIN stitches them back together using a matching column, u...</span></a><a class="card" href="sets.html"><b>6. SET Operators</b><span>JOIN adds columns side by side. SET operators stack the results of two queries on top of each other as rows.</span></a><a class="card" href="string.html"><b>7. String Functions</b><span>Functions that clean, reshape and extract pieces of text. They work on each row and return a value per row.</span></a><a class="card" href="number.html"><b>8. Number Functions</b><span>Two small ones: ROUND and ABS.</span></a><a class="card" href="date.html"><b>9. Date &amp; Time Functions</b><span>Dates are a category of their own. You extract parts, truncate, format, convert, calculate with and validate t...</span></a><a class="card" href="null.html"><b>10. NULL Functions</b><span>NULL means unknown, not zero and not empty text. It poisons arithmetic and is skipped by aggregates, so you mu...</span></a><a class="card" href="case.html"><b>11. CASE Statement</b><span>CASE is SQL&#x27;s if / else if / else. It creates a new value per row based on conditions.</span></a><a class="card" href="aggregate.html"><b>12. Aggregate Functions</b><span>Aggregates squash many rows into one number. Paired with GROUP BY they give one number per group.</span></a><a class="card" href="window-basics.html"><b>13. Window Functions: Basics</b><span>A window function calculates across a set of related rows but keeps every individual row. GROUP BY collapses r...</span></a><a class="card" href="window-agg.html"><b>14. Window Aggregate Functions</b><span>COUNT, SUM, AVG, MIN, MAX used as windows. Perfect for comparing each row to a total or average without losing...</span></a><a class="card" href="window-rank.html"><b>15. Window Ranking Functions</b><span>Number rows by order. Five functions: ROW_NUMBER, RANK, DENSE_RANK, NTILE, CUME_DIST.</span></a><a class="card" href="window-value.html"><b>16. Window Value Functions</b><span>Reach into other rows: LAG looks back, LEAD looks forward, FIRST_VALUE / LAST_VALUE grab the edges of the wind...</span></a><a class="card" href="subquery.html"><b>17. Subqueries</b><span>A query inside another query. The inner result feeds the outer one. They can live in FROM, SELECT, JOIN or WHE...</span></a><a class="card" href="cte.html"><b>18. CTE (Common Table Expressions)</b><span>A CTE is a named temporary result you define with WITH and use like a table in the query right after it. It ex...</span></a><a class="card" href="views.html"><b>19. Views</b><span>A view is a saved query that behaves like a virtual table. It stores no data itself, only the SELECT, and runs...</span></a><a class="card" href="temp.html"><b>20. Temporary Tables &amp; CTAS</b><span>Persist a query result as a real table. Permanent (CTAS) or temporary (#name, dropped when your session ends).</span></a><a class="card" href="procs.html"><b>21. Stored Procedures</b><span>A stored procedure is a saved program: SQL statements plus variables, logic and error handling that you run wi...</span></a><a class="card" href="triggers.html"><b>22. Triggers</b><span>A trigger runs automatically when an INSERT, UPDATE or DELETE happens on a table. Common use: audit logging.</span></a><a class="card" href="indexes.html"><b>23. Indexes</b><span>An index is a structure that lets the database find rows without scanning the whole table, like the index at t...</span></a><a class="card" href="partitions.html"><b>24. Partitions</b><span>Partitioning splits one big table into smaller physical pieces (usually by date) so queries touch only the rel...</span></a><a class="card" href="performance.html"><b>25. 30 Performance Tips</b><span>A checklist of habits that make queries faster. Always confirm with the execution plan.</span></a><a class="card" href="ai.html"><b>26. AI and SQL</b><span>Sixteen reusable prompt recipes for using an AI assistant as a SQL tutor, reviewer and debugger.</span></a><a class="card" href="projects.html"><b>27. Projects: ETL &amp; Data Analytics</b><span>The course ends with two projects: a SQL data warehouse (data engineering) and exploratory plus advanced data ...</span></a></div></main></div>
+<footer>Unofficial personal study notes. Course by Baraa Khatib Salkini (<a href="https://www.datawithbaraa.com">Data With Baraa</a>). SQL examples come from the course repository, released under the <a href="https://github.com/DataWithBaraa/sql-ultimate-course/blob/main/LICENSE">MIT License</a>. Explanations are my own.</footer>
 <script>
-  var ITEMS = [
-    "Install SQL Server Express and SSMS",
-    "Download the course materials and datasets",
-    "Review the course roadmap",
-    "Restore or create the practice database",
-    "Write basic SELECT queries",
-    "Filter and sort data (WHERE, ORDER BY)",
-    "Combine tables with JOINs",
-    "Aggregate with GROUP BY and HAVING",
-    "Use subqueries and CTEs",
-    "Use window functions",
-    "Complete the SQL Data Analytics project",
-    "Complete the SQL Data Warehouse project"
-  ];
-  var KEY = "sql-hub-progress";
-  var state = {};
-  try { state = JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) {}
-  var list = document.getElementById("list");
-  function render() {
-    var done = ITEMS.filter(function (_, i) { return state[i]; }).length;
-    document.getElementById("progress").textContent = done + " of " + ITEMS.length + " complete";
-  }
-  ITEMS.forEach(function (text, i) {
-    var li = document.createElement("li");
-    var label = document.createElement("label");
-    var box = document.createElement("input");
-    box.type = "checkbox";
-    box.checked = !!state[i];
-    var span = document.createElement("span");
-    span.textContent = text;
-    box.addEventListener("change", function () {
-      state[i] = box.checked;
-      try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
-      render();
-    });
-    label.appendChild(box); label.appendChild(span);
-    li.appendChild(label); list.appendChild(li);
-  });
-  render();
-</script>
-</body>
-</html>
+(function(){
+var K='sqlhub-done',theme='sqlhub-theme';
+function load(){try{return JSON.parse(localStorage.getItem(K))||{}}catch(e){return{}}}
+function save(o){try{localStorage.setItem(K,JSON.stringify(o))}catch(e){}}
+try{var t=localStorage.getItem(theme);if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}
+document.getElementById('theme').onclick=function(){var d=document.documentElement,c=d.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');var n=c==='dark'?'light':'dark';d.setAttribute('data-theme',n);try{localStorage.setItem(theme,n)}catch(e){}};
+document.getElementById('menu').onclick=function(){document.getElementById('side').classList.toggle('open')};
+var done=load();
+function paint(){document.querySelectorAll('nav.side a[data-id]').forEach(function(a){var t=a.querySelector('.tick');if(t)t.textContent=done[a.dataset.id]?'✓':''});
+var n=Object.keys(done).filter(function(k){return done[k]}).length,tot=document.querySelectorAll('nav.side a[data-id]').length;
+var b=document.getElementById('prog');if(b){b.style.width=(100*n/tot)+'%'}var l=document.getElementById('proglabel');if(l)l.textContent=n+' of '+tot+' chapters done'}
+var cb=document.getElementById('donecb');
+if(cb){cb.checked=!!done[cb.dataset.id];cb.onchange=function(){done[cb.dataset.id]=cb.checked;save(done);paint()}}
+paint();
+var q=document.getElementById('q');
+if(q)q.oninput=function(){var v=q.value.toLowerCase();document.querySelectorAll('nav.side a').forEach(function(a){a.style.display=a.textContent.toLowerCase().indexOf(v)>-1?'':'none'})};
+// syntax highlight
+var KW='SELECT|FROM|WHERE|GROUP BY|ORDER BY|HAVING|DISTINCT|TOP|AS|AND|OR|NOT|IN|IS|NULL|LIKE|BETWEEN|EXISTS|ANY|ALL|JOIN|INNER|LEFT|RIGHT|FULL|OUTER|CROSS|ON|UNION|EXCEPT|INTERSECT|CASE|WHEN|THEN|ELSE|END|INSERT|INTO|VALUES|UPDATE|SET|DELETE|TRUNCATE|CREATE|ALTER|DROP|TABLE|VIEW|INDEX|PROCEDURE|TRIGGER|PRIMARY KEY|FOREIGN KEY|REFERENCES|CONSTRAINT|ADD|COLUMN|WITH|OVER|PARTITION BY|ROWS|RANGE|BETWEEN|UNBOUNDED|PRECEDING|FOLLOWING|CURRENT ROW|ASC|DESC|USE|GO|BEGIN|END|IF|DECLARE|EXEC|PRINT|TRY|CATCH|AFTER|ON|NONCLUSTERED|CLUSTERED|COLUMNSTORE|UNIQUE|OPTION|RECURSION|FILEGROUP|FILE|TO|FOR|RANGE|SCHEME|FUNCTION|PARTITION|NOT NULL|WHERE|INT|VARCHAR|DATE|FLOAT|NVARCHAR|CHAR|IDENTITY|OBJECT_ID';
+var kwRe=new RegExp('\\b('+KW+')\\b','gi');
+document.querySelectorAll('pre code').forEach(function(c){
+ var s=c.textContent.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+ var tokens=[];function stash(h){tokens.push(h);return '\u0001'+(tokens.length-1)+'\u0002'}
+ s=s.replace(/\/\*[\s\S]*?\*\//g,function(m){return stash('<span class=c>'+m+'</span>')});
+ s=s.replace(/--.*$/gm,function(m){return stash('<span class=c>'+m+'</span>')});
+ s=s.replace(/'(?:[^']|'')*'/g,function(m){return stash('<span class=s>'+m+'</span>')});
+ s=s.replace(/\b\d+(\.\d+)?\b/g,'<span class=n>$&</span>');
+ s=s.replace(/\b([A-Z_][A-Z_0-9]*)\s*\(/g,function(m,f){return '<span class=f>'+f+'</span>('});
+ s=s.replace(kwRe,'<span class=k>$1</span>');
+ s=s.replace(/\u0001(\d+)\u0002/g,function(m,i){return tokens[i]});
+ c.innerHTML=s;
+ var p=c.parentNode,b=document.createElement('button');b.textContent='Copy';
+ b.onclick=function(){navigator.clipboard&&navigator.clipboard.writeText(c.textContent);b.textContent='Copied';setTimeout(function(){b.textContent='Copy'},1200)};
+ p.appendChild(b);
+});
+})();
+</script></body></html>

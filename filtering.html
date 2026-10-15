@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Filtering Data | SQL Study Notes</title>
+<meta name="description" content="Personal study notes for the Data With Baraa SQL Ultimate Course, with examples and flashcards.">
+<style>
+:root{--bg:#fafafa;--fg:#1b1f24;--muted:#5b6470;--card:#fff;--line:#e3e6ea;--accent:#2563eb;--code:#0f172a;--codefg:#e2e8f0;--ok:#16a34a;--warn:#b45309;--side:#f3f4f6}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0f1318;--fg:#e8ebef;--muted:#9aa4b0;--card:#171c23;--line:#262d36;--accent:#6ea8ff;--code:#0a0e13;--codefg:#dbe4ee;--ok:#4ade80;--warn:#fbbf24;--side:#12171d}}
+:root[data-theme=dark]{--bg:#0f1318;--fg:#e8ebef;--muted:#9aa4b0;--card:#171c23;--line:#262d36;--accent:#6ea8ff;--code:#0a0e13;--codefg:#dbe4ee;--ok:#4ade80;--warn:#fbbf24;--side:#12171d}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font:16px/1.7 system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--fg)}
+a{color:var(--accent)}
+.top{position:sticky;top:0;z-index:20;background:var(--card);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px;padding:10px 16px}
+.top .brand{font-weight:700;text-decoration:none;color:var(--fg)}
+.top .sp{flex:1}
+.top button,.top a.btn{background:transparent;border:1px solid var(--line);color:var(--fg);border-radius:8px;padding:6px 10px;cursor:pointer;font:inherit;font-size:.9rem;text-decoration:none}
+.layout{display:flex;max-width:1280px;margin:0 auto}
+nav.side{width:270px;flex:none;position:sticky;top:53px;align-self:flex-start;height:calc(100vh - 53px);overflow:auto;padding:14px;background:var(--side);border-right:1px solid var(--line)}
+nav.side input{width:100%;padding:8px 10px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--fg);font:inherit;font-size:.9rem;margin-bottom:10px}
+nav.side h4{margin:14px 0 4px;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+nav.side a{display:flex;gap:8px;align-items:center;padding:5px 8px;border-radius:6px;text-decoration:none;color:var(--fg);font-size:.93rem}
+nav.side a:hover{background:var(--line)}nav.side a.cur{background:var(--accent);color:#fff}
+nav.side a .n{color:var(--muted);width:1.6em;text-align:right;flex:none;font-variant-numeric:tabular-nums}
+nav.side a.cur .n{color:#fff}
+nav.side a .tick{margin-left:auto;color:var(--ok);font-weight:700}
+main{flex:1;min-width:0;padding:24px 28px 80px;max-width:900px}
+h1{font-size:2rem;line-height:1.2;margin:.2em 0 .3em}h2{margin:1.6em 0 .4em;font-size:1.35rem}h3{margin:1.2em 0 .3em}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
+.chip{font-size:.8rem;border:1px solid var(--line);background:var(--card);padding:2px 10px;border-radius:99px;color:var(--muted)}
+.lead{font-size:1.1rem;color:var(--muted)}
+.sec{border-top:1px solid var(--line);padding-top:6px}
+pre{position:relative;background:var(--code);color:var(--codefg);padding:14px 16px;border-radius:10px;overflow:auto;font:13.5px/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;margin:10px 0}
+pre .k{color:#7dd3fc;font-weight:600}pre .f{color:#fcd34d}pre .s{color:#86efac}pre .c{color:#94a3b8;font-style:italic}pre .n{color:#f9a8d4}
+pre button{position:absolute;top:6px;right:6px;background:#334155;color:#e2e8f0;border:0;border-radius:6px;padding:3px 8px;font-size:.75rem;cursor:pointer;opacity:.0}
+pre:hover button{opacity:1}
+code{background:var(--card);border:1px solid var(--line);padding:1px 6px;border-radius:5px;font-size:.88em}
+pre code{background:none;border:0;padding:0;font-size:inherit}
+.box{border-radius:10px;padding:12px 16px;margin:14px 0;border:1px solid var(--line);background:var(--card)}
+.box h3{margin:0 0 4px;font-size:1rem}.box ul{margin:.3em 0;padding-left:1.2em}
+.box.r{border-left:4px solid var(--accent)}.box.m{border-left:4px solid var(--warn)}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;text-decoration:none;color:var(--fg);display:block}
+.card:hover{border-color:var(--accent)}.card b{display:block}.card span{color:var(--muted);font-size:.9rem}
+table{border-collapse:collapse;width:100%;margin:10px 0;font-size:.93rem;background:var(--card)}
+th,td{border:1px solid var(--line);padding:6px 10px;text-align:left;vertical-align:top}th{background:var(--side)}
+.scroll{overflow:auto}
+details.q{border:1px solid var(--line);border-radius:10px;padding:8px 14px;margin:8px 0;background:var(--card)}
+details.q summary{cursor:pointer;font-weight:600}
+.done{display:flex;gap:10px;align-items:center;margin:26px 0;padding:12px 16px;border:1px dashed var(--line);border-radius:10px}
+.pn{display:flex;justify-content:space-between;gap:12px;margin-top:30px}
+.bar{height:8px;border-radius:99px;background:var(--line);overflow:hidden}.bar i{display:block;height:100%;background:var(--ok);width:0}
+.fc{min-height:180px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:1.2rem;padding:24px;cursor:pointer;user-select:none}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.row button{background:var(--card);color:var(--fg);border:1px solid var(--line);border-radius:8px;padding:8px 14px;cursor:pointer;font:inherit}
+.row button.p{background:var(--accent);color:#fff;border-color:var(--accent)}
+.menu{display:none}
+@media(max-width:860px){.menu{display:inline-block}nav.side{position:fixed;left:0;top:53px;z-index:15;transform:translateX(-100%);transition:transform .2s;width:80%;max-width:300px}nav.side.open{transform:none}main{padding:18px 16px 70px}}
+footer{border-top:1px solid var(--line);padding:20px 16px;text-align:center;color:var(--muted);font-size:.88rem}
+</style></head><body>
+<div class="top"><button class="menu" id="menu" aria-label="Menu">Menu</button><a class="brand" href="index.html">SQL Study Notes</a><span class="sp"></span><a class="btn" href="https://github.com/DataWithBaraa/sql-ultimate-course" target="_blank" rel="noopener">Source repo</a><button id="theme" aria-label="Toggle theme">Light/Dark</button></div>
+<div class="layout"><nav class="side" id="side"><input id="q" placeholder="Filter topics..." aria-label="Filter topics"><h4>Start</h4><a href="index.html"><span class="n"></span><span>Home</span></a><a href="setup.html"><span class="n"></span><span>Setup guide</span></a><a href="data.html"><span class="n"></span><span>The databases</span></a><h4>Core querying</h4><a href="select.html" data-id="select"><span class="n">1</span><span>Query Data: SELECT</span><span class="tick"></span></a><a href="ddl.html" data-id="ddl"><span class="n">2</span><span>Define Structure: DDL</span><span class="tick"></span></a><a href="dml.html" data-id="dml"><span class="n">3</span><span>Change Data: DML</span><span class="tick"></span></a><a href="filtering.html" class="cur" data-id="filtering"><span class="n">4</span><span>Filtering Data</span><span class="tick"></span></a><a href="joins.html" data-id="joins"><span class="n">5</span><span>Combining Tables: JOINs</span><span class="tick"></span></a><a href="sets.html" data-id="sets"><span class="n">6</span><span>SET Operators</span><span class="tick"></span></a><h4>Functions</h4><a href="string.html" data-id="string"><span class="n">7</span><span>String Functions</span><span class="tick"></span></a><a href="number.html" data-id="number"><span class="n">8</span><span>Number Functions</span><span class="tick"></span></a><a href="date.html" data-id="date"><span class="n">9</span><span>Date &amp; Time Functions</span><span class="tick"></span></a><a href="null.html" data-id="null"><span class="n">10</span><span>NULL Functions</span><span class="tick"></span></a><a href="case.html" data-id="case"><span class="n">11</span><span>CASE Statement</span><span class="tick"></span></a><a href="aggregate.html" data-id="aggregate"><span class="n">12</span><span>Aggregate Functions</span><span class="tick"></span></a><h4>Window functions</h4><a href="window-basics.html" data-id="window-basics"><span class="n">13</span><span>Window Functions: Basics</span><span class="tick"></span></a><a href="window-agg.html" data-id="window-agg"><span class="n">14</span><span>Window Aggregate Functions</span><span class="tick"></span></a><a href="window-rank.html" data-id="window-rank"><span class="n">15</span><span>Window Ranking Functions</span><span class="tick"></span></a><a href="window-value.html" data-id="window-value"><span class="n">16</span><span>Window Value Functions</span><span class="tick"></span></a><h4>Reusable logic</h4><a href="subquery.html" data-id="subquery"><span class="n">17</span><span>Subqueries</span><span class="tick"></span></a><a href="cte.html" data-id="cte"><span class="n">18</span><span>CTE (Common Table Expressions)</span><span class="tick"></span></a><a href="views.html" data-id="views"><span class="n">19</span><span>Views</span><span class="tick"></span></a><a href="temp.html" data-id="temp"><span class="n">20</span><span>Temporary Tables &amp; CTAS</span><span class="tick"></span></a><a href="procs.html" data-id="procs"><span class="n">21</span><span>Stored Procedures</span><span class="tick"></span></a><a href="triggers.html" data-id="triggers"><span class="n">22</span><span>Triggers</span><span class="tick"></span></a><h4>Performance</h4><a href="indexes.html" data-id="indexes"><span class="n">23</span><span>Indexes</span><span class="tick"></span></a><a href="partitions.html" data-id="partitions"><span class="n">24</span><span>Partitions</span><span class="tick"></span></a><a href="performance.html" data-id="performance"><span class="n">25</span><span>30 Performance Tips</span><span class="tick"></span></a><h4>Beyond</h4><a href="ai.html" data-id="ai"><span class="n">26</span><span>AI and SQL</span><span class="tick"></span></a><a href="projects.html" data-id="projects"><span class="n">27</span><span>Projects: ETL &amp; Data Analytics</span><span class="tick"></span></a><h4>Review</h4><a href="cheatsheet.html"><span class="n"></span><span>Cheat sheet</span></a><a href="practice.html"><span class="n"></span><span>Flashcards</span></a></nav><main><h1>4. Filtering Data</h1><div class="meta"><span class="chip">Database: MyDatabase</span><span class="chip">Script: 04_Filtering_Data.sql</span></div><p class="lead">WHERE accepts comparison, logical, range, membership and pattern operators. Combine them to pinpoint rows.</p><div class="box r"><h3>Remember this</h3><ul><li>BETWEEN includes both boundaries.</li><li>% = many characters, _ = exactly one.</li></ul></div><div class="sec"><h2>Comparison operators</h2><p><code>=</code> equal, <code>&lt;&gt;</code> or <code>!=</code> not equal, <code>&gt;</code>, <code>&gt;=</code>, <code>&lt;</code>, <code>&lt;=</code>.</p><pre><code>SELECT * FROM customers WHERE score &gt;= 500</code></pre></div><div class="sec"><h2>AND, OR, NOT</h2><p>AND needs every condition true. OR needs at least one. NOT reverses a condition.</p><pre><code>SELECT * FROM customers
+WHERE country = &#x27;USA&#x27; AND score &gt; 500</code></pre></div><div class="sec"><h2>BETWEEN</h2><p>Inclusive range check. Both ends are included.</p><pre><code>SELECT * FROM customers
+WHERE score BETWEEN 100 AND 500
+-- same as: score &gt;= 100 AND score &lt;= 500</code></pre></div><div class="sec"><h2>IN</h2><p>Matches any value in a list. Cleaner than chaining ORs.</p><pre><code>SELECT * FROM customers WHERE country IN (&#x27;Germany&#x27;, &#x27;USA&#x27;)</code></pre></div><div class="sec"><h2>LIKE patterns</h2><p><code>%</code> matches any number of characters (including none). <code>_</code> matches exactly one character.</p><pre><code>WHERE first_name LIKE &#x27;M%&#x27;    -- starts with M
+WHERE first_name LIKE &#x27;%n&#x27;    -- ends with n
+WHERE first_name LIKE &#x27;%r%&#x27;   -- contains r
+WHERE first_name LIKE &#x27;__r%&#x27;  -- r is 3rd letter</code></pre></div><div class="box m"><h3>Common mistakes</h3><ul><li>Writing <code>= NULL</code>. NULL needs <code>IS NULL</code> (see the NULL chapter).</li><li>Mixing AND with OR without parentheses and getting a surprising result: AND binds tighter.</li></ul></div><h2>Check yourself</h2><details class="q"><summary>What does LIKE &#x27;__r%&#x27; match?</summary><p>Text whose third character is r.</p></details><details class="q"><summary>Is BETWEEN 100 AND 500 inclusive?</summary><p>Yes, both 100 and 500 are included.</p></details><div class="done"><input type="checkbox" id="donecb" data-id="filtering"><label for="donecb">Mark this chapter as done</label></div><div class="pn"><a href="dml.html">&larr; Change Data: DML</a><a href="joins.html">Combining Tables: JOINs &rarr;</a></div></main></div>
+<footer>Unofficial personal study notes. Course by Baraa Khatib Salkini (<a href="https://www.datawithbaraa.com">Data With Baraa</a>). SQL examples come from the course repository, released under the <a href="https://github.com/DataWithBaraa/sql-ultimate-course/blob/main/LICENSE">MIT License</a>. Explanations are my own.</footer>
+<script>
+(function(){
+var K='sqlhub-done',theme='sqlhub-theme';
+function load(){try{return JSON.parse(localStorage.getItem(K))||{}}catch(e){return{}}}
+function save(o){try{localStorage.setItem(K,JSON.stringify(o))}catch(e){}}
+try{var t=localStorage.getItem(theme);if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}
+document.getElementById('theme').onclick=function(){var d=document.documentElement,c=d.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');var n=c==='dark'?'light':'dark';d.setAttribute('data-theme',n);try{localStorage.setItem(theme,n)}catch(e){}};
+document.getElementById('menu').onclick=function(){document.getElementById('side').classList.toggle('open')};
+var done=load();
+function paint(){document.querySelectorAll('nav.side a[data-id]').forEach(function(a){var t=a.querySelector('.tick');if(t)t.textContent=done[a.dataset.id]?'✓':''});
+var n=Object.keys(done).filter(function(k){return done[k]}).length,tot=document.querySelectorAll('nav.side a[data-id]').length;
+var b=document.getElementById('prog');if(b){b.style.width=(100*n/tot)+'%'}var l=document.getElementById('proglabel');if(l)l.textContent=n+' of '+tot+' chapters done'}
+var cb=document.getElementById('donecb');
+if(cb){cb.checked=!!done[cb.dataset.id];cb.onchange=function(){done[cb.dataset.id]=cb.checked;save(done);paint()}}
+paint();
+var q=document.getElementById('q');
+if(q)q.oninput=function(){var v=q.value.toLowerCase();document.querySelectorAll('nav.side a').forEach(function(a){a.style.display=a.textContent.toLowerCase().indexOf(v)>-1?'':'none'})};
+// syntax highlight
+var KW='SELECT|FROM|WHERE|GROUP BY|ORDER BY|HAVING|DISTINCT|TOP|AS|AND|OR|NOT|IN|IS|NULL|LIKE|BETWEEN|EXISTS|ANY|ALL|JOIN|INNER|LEFT|RIGHT|FULL|OUTER|CROSS|ON|UNION|EXCEPT|INTERSECT|CASE|WHEN|THEN|ELSE|END|INSERT|INTO|VALUES|UPDATE|SET|DELETE|TRUNCATE|CREATE|ALTER|DROP|TABLE|VIEW|INDEX|PROCEDURE|TRIGGER|PRIMARY KEY|FOREIGN KEY|REFERENCES|CONSTRAINT|ADD|COLUMN|WITH|OVER|PARTITION BY|ROWS|RANGE|BETWEEN|UNBOUNDED|PRECEDING|FOLLOWING|CURRENT ROW|ASC|DESC|USE|GO|BEGIN|END|IF|DECLARE|EXEC|PRINT|TRY|CATCH|AFTER|ON|NONCLUSTERED|CLUSTERED|COLUMNSTORE|UNIQUE|OPTION|RECURSION|FILEGROUP|FILE|TO|FOR|RANGE|SCHEME|FUNCTION|PARTITION|NOT NULL|WHERE|INT|VARCHAR|DATE|FLOAT|NVARCHAR|CHAR|IDENTITY|OBJECT_ID';
+var kwRe=new RegExp('\\b('+KW+')\\b','gi');
+document.querySelectorAll('pre code').forEach(function(c){
+ var s=c.textContent.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+ var tokens=[];function stash(h){tokens.push(h);return '\u0001'+(tokens.length-1)+'\u0002'}
+ s=s.replace(/\/\*[\s\S]*?\*\//g,function(m){return stash('<span class=c>'+m+'</span>')});
+ s=s.replace(/--.*$/gm,function(m){return stash('<span class=c>'+m+'</span>')});
+ s=s.replace(/'(?:[^']|'')*'/g,function(m){return stash('<span class=s>'+m+'</span>')});
+ s=s.replace(/\b\d+(\.\d+)?\b/g,'<span class=n>$&</span>');
+ s=s.replace(/\b([A-Z_][A-Z_0-9]*)\s*\(/g,function(m,f){return '<span class=f>'+f+'</span>('});
+ s=s.replace(kwRe,'<span class=k>$1</span>');
+ s=s.replace(/\u0001(\d+)\u0002/g,function(m,i){return tokens[i]});
+ c.innerHTML=s;
+ var p=c.parentNode,b=document.createElement('button');b.textContent='Copy';
+ b.onclick=function(){navigator.clipboard&&navigator.clipboard.writeText(c.textContent);b.textContent='Copied';setTimeout(function(){b.textContent='Copy'},1200)};
+ p.appendChild(b);
+});
+})();
+</script></body></html>
